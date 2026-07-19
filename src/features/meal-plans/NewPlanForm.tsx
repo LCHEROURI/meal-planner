@@ -19,7 +19,7 @@ export function NewPlanForm() {
   const { user } = useAuthStore();
 
   const { register, handleSubmit, formState: { errors } } = useForm<MealPlanGenerationInput>({
-    resolver: zodResolver(MealPlanGenerationInputSchema),
+    resolver: zodResolver(MealPlanGenerationInputSchema) as any,
     defaultValues: {
       planLength: '5',
       servings: 2,

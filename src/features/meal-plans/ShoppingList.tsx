@@ -5,6 +5,7 @@ import { db } from '../../lib/firebase/config';
 import { useAuthStore } from '../../stores/authStore';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { ErrorState } from '../../components/common/ErrorState';
+import { Button } from '../../components/common/Button';
 import { ArrowLeft, CheckCircle2, Circle } from 'lucide-react';
 import type { MealPlan, Ingredient } from '../../schemas';
 

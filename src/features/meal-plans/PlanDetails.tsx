@@ -158,7 +158,7 @@ export function PlanDetails() {
           {plan.sharedId ? (
             <div className="flex items-center space-x-2">
               <Button 
-                variant="outline" 
+                variant="secondary" 
                 size="sm" 
                 onClick={handleShare}
                 disabled={isSharing}
@@ -180,7 +180,7 @@ export function PlanDetails() {
             </div>
           ) : (
             <Button 
-              variant="outline" 
+              variant="secondary" 
               onClick={handleShare}
               disabled={isSharing}
             >

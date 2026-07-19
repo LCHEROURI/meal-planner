@@ -90,6 +90,8 @@ exports.MealPlanSchema = zod_1.z.object({
     modelName: zod_1.z.string(),
     recipes: zod_1.z.array(exports.RecipeSchema), // We can store them as subcollections later, but for Generation output it's nested
     metadata: exports.GenerationMetadataSchema.optional(),
+    shoppingList: zod_1.z.array(zod_1.z.any()).optional(),
+    sharedId: zod_1.z.string().optional(),
 });
 exports.ShoppingListItemSchema = zod_1.z.object({
     id: zod_1.z.string().optional(),

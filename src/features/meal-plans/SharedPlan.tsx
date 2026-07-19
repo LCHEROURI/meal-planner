@@ -5,8 +5,7 @@ import { db } from '../../lib/firebase/config';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { ErrorState } from '../../components/common/ErrorState';
 import { Button } from '../../components/common/Button';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../../components/common/Card';
-import { Clock, Users, Calendar, ChefHat } from 'lucide-react';
+import { Clock, Users, ChefHat } from 'lucide-react';
 import type { MealPlan } from '../../schemas';
 
 export function SharedPlan() {
