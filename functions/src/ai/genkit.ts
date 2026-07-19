@@ -1,6 +1,6 @@
 import { genkit } from 'genkit';
-import { vertexAI, gemini15Pro } from '@genkit-ai/vertexai';
 import { MealPlanGenerationInputSchema, MealPlanSchema, RecipeSchema, RegenerationRequestSchema } from '../schemas';
+import { vertexAI } from '@genkit-ai/google-genai';
 import { systemPrompt } from './prompts';
 
 export const ai = genkit({
@@ -32,7 +32,7 @@ export const generateMealPlanFlow = ai.defineFlow(
     `;
 
     const { output } = await ai.generate({
-      model: gemini15Pro,
+      model: vertexAI.model('gemini-1.5-flash-001'),
       system: systemPrompt,
       prompt: prompt,
       output: {
@@ -50,7 +50,7 @@ export const generateMealPlanFlow = ai.defineFlow(
     output.status = 'ready';
     output.generationInput = input;
     output.metadata = {
-      modelName: 'gemini-1.5-pro',
+      modelName: 'gemini-1.5-flash',
       promptVersion: '1.0',
       generationTimestamp: new Date().toISOString(),
       generationDurationMs: 0,
@@ -89,7 +89,7 @@ export const regenerateRecipeFlow = ai.defineFlow(
     `;
 
     const { output } = await ai.generate({
-      model: gemini15Pro,
+      model: vertexAI.model('gemini-1.5-flash-001'),
       system: systemPrompt,
       prompt: prompt,
       output: {

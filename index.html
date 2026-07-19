@@ -8,6 +8,22 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        document.body.innerHTML = '<div style="padding: 20px; color: red; font-family: monospace;">' + 
+          '<h2>Global Error Caught</h2>' +
+          '<p>' + message + '</p>' +
+          '<p>Source: ' + source + ':' + lineno + ':' + colno + '</p>' +
+          '<pre>' + (error && error.stack ? error.stack : '') + '</pre>' +
+          '</div>';
+      };
+      window.addEventListener('unhandledrejection', function(event) {
+        document.body.innerHTML = '<div style="padding: 20px; color: red; font-family: monospace;">' + 
+          '<h2>Unhandled Promise Rejection</h2>' +
+          '<p>' + event.reason + '</p>' +
+          '</div>';
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

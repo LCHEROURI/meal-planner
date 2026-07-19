@@ -131,7 +131,7 @@ export function NewPlanForm() {
             <label className="mb-2 block text-sm font-medium text-text-primary">Ingredients to use soon (comma separated)</label>
             <Input 
               {...register('useSoonIngredients', {
-                setValueAs: (v) => v ? v.split(',').map((s: string) => s.trim()).filter(Boolean) : []
+                setValueAs: (v) => typeof v === 'string' ? v.split(',').map((s: string) => s.trim()).filter(Boolean) : (v || [])
               })}
               placeholder="e.g. spinach, ground beef, bell peppers"
             />
@@ -141,7 +141,7 @@ export function NewPlanForm() {
             <label className="mb-2 block text-sm font-medium text-text-primary">Excluded ingredients (comma separated)</label>
             <Input 
               {...register('excludedIngredients', {
-                setValueAs: (v) => v ? v.split(',').map((s: string) => s.trim()).filter(Boolean) : []
+                setValueAs: (v) => typeof v === 'string' ? v.split(',').map((s: string) => s.trim()).filter(Boolean) : (v || [])
               })}
               placeholder="e.g. mushrooms, cilantro"
             />

@@ -2,7 +2,6 @@ import { initializeApp, getApps } from 'firebase/app';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
-import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
 // This would be replaced with your actual Firebase config in production
 // Currently uses placeholder for local emulator development
@@ -23,8 +22,8 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const functions = getFunctions(app);
 
-// Connect to emulators if in development
-if (import.meta.env.DEV) {
+// Connect to emulators if in development and explicitly enabled (or not explicitly disabled)
+if (import.meta.env.DEV && import.meta.env.VITE_USE_FIREBASE_EMULATOR !== 'false') {
   // Use a debug token in development. 
   // DO NOT commit a real token. The VITE_APP_CHECK_DEBUG_TOKEN can be set in .env.local
   if (import.meta.env.VITE_APP_CHECK_DEBUG_TOKEN) {
@@ -40,12 +39,15 @@ if (import.meta.env.DEV) {
 }
 
 // Initialize App Check (even in dev, with debug token logic above)
+// Disable App Check for MVP to prevent 403 errors when testing live
 let appCheck;
+/*
 if (typeof window !== 'undefined') {
   appCheck = initializeAppCheck(app, {
     provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'),
     isTokenAutoRefreshEnabled: true
   });
 }
+*/
 
 export { app, auth, db, functions, appCheck };

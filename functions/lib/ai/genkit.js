@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.regenerateRecipeFlow = exports.generateMealPlanFlow = exports.ai = void 0;
 const genkit_1 = require("genkit");
-const vertexai_1 = require("@genkit-ai/vertexai");
 const schemas_1 = require("../schemas");
+const google_genai_1 = require("@genkit-ai/google-genai");
 const prompts_1 = require("./prompts");
 exports.ai = (0, genkit_1.genkit)({
-    plugins: [(0, vertexai_1.vertexAI)({ location: 'us-central1' })],
+    plugins: [(0, google_genai_1.vertexAI)({ location: 'us-central1' })],
 });
 exports.generateMealPlanFlow = exports.ai.defineFlow({
     name: 'generateMealPlanFlow',
@@ -30,7 +30,7 @@ exports.generateMealPlanFlow = exports.ai.defineFlow({
       Provide a highly realistic, delicious, and easy-to-follow meal plan that adheres strictly to these constraints.
     `;
     const { output } = await exports.ai.generate({
-        model: vertexai_1.gemini15Pro,
+        model: google_genai_1.vertexAI.model('gemini-1.5-flash-001'),
         system: prompts_1.systemPrompt,
         prompt: prompt,
         output: {
@@ -46,7 +46,7 @@ exports.generateMealPlanFlow = exports.ai.defineFlow({
     output.status = 'ready';
     output.generationInput = input;
     output.metadata = {
-        modelName: 'gemini-1.5-pro',
+        modelName: 'gemini-1.5-flash',
         promptVersion: '1.0',
         generationTimestamp: new Date().toISOString(),
         generationDurationMs: 0,
@@ -79,7 +79,7 @@ exports.regenerateRecipeFlow = exports.ai.defineFlow({
       Do not repeat any other recipes in the current plan.
     `;
     const { output } = await exports.ai.generate({
-        model: vertexai_1.gemini15Pro,
+        model: google_genai_1.vertexAI.model('gemini-1.5-flash-001'),
         system: prompts_1.systemPrompt,
         prompt: prompt,
         output: {
