@@ -45,22 +45,25 @@ export function Dashboard() {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-text-primary">Your Meal Plans</h1>
+    <div className="mx-auto max-w-5xl space-y-8 pb-10">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="section-kicker">Your dinner rhythm</p>
+          <h1 className="mt-2 text-4xl font-black tracking-tight text-text-primary">Your meal plans</h1>
+        </div>
         <Link to="/app/new-plan">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
-            New Plan
+            Create plan
           </Button>
         </Link>
       </div>
 
       {plans.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-surface p-12 text-center shadow-sm">
-          <Calendar className="mb-4 h-12 w-12 text-text-secondary opacity-50" />
-          <h3 className="mb-2 text-xl font-bold text-text-primary">No meal plans yet</h3>
-          <p className="mb-6 max-w-md text-text-secondary">Generate your first weeknight dinner plan tailored to your preferences.</p>
+        <div className="empty-plan-state">
+          <div className="empty-plan-icon"><Calendar aria-hidden="true" /></div>
+          <h3 className="mb-2 text-2xl font-black text-text-primary">Make your first plan</h3>
+          <p className="mb-6 max-w-md text-text-secondary">Speak your week or type the details. We’ll turn your kitchen, schedule, and preferences into practical dinners.</p>
           <Link to="/app/new-plan">
             <Button>Create Your First Plan</Button>
           </Link>
@@ -68,7 +71,7 @@ export function Dashboard() {
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {plans.map(plan => (
-            <Card key={plan.id} className="flex flex-col transition-shadow hover:shadow-md">
+            <Card key={plan.id} className="flex flex-col border-white/80 bg-white/90 transition-all hover:-translate-y-1 hover:shadow-xl">
               <CardHeader>
                 <CardTitle>{plan.name || 'Weeknight Meal Plan'}</CardTitle>
                 <p className="text-sm text-text-secondary">
@@ -77,11 +80,11 @@ export function Dashboard() {
               </CardHeader>
               <CardContent className="flex-1">
                 <div className="flex flex-wrap gap-2 text-sm text-text-secondary">
-                  <span className="flex items-center rounded-full bg-background px-2 py-1">
+                  <span className="flex items-center rounded-full bg-sky-100 px-2 py-1 text-sky-800">
                     <Calendar className="mr-1 h-3 w-3" />
                     {plan.planLength} days
                   </span>
-                  <span className="flex items-center rounded-full bg-background px-2 py-1">
+                  <span className="flex items-center rounded-full bg-violet-100 px-2 py-1 text-violet-800">
                     <Clock className="mr-1 h-3 w-3" />
                     {plan.generationInput.maxTotalTimeMinutes} min/meal
                   </span>

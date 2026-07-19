@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #FDFBF7;
+  --color-background: #dff5ff;
   --color-surface: #FFFFFF;
-  --color-primary: #4B6043;
-  --color-primary-hover: #3A4A34;
-  --color-accent: #C87550;
-  --color-accent-secondary: #D4AF37;
-  --color-text-primary: #333333;
-  --color-text-secondary: #64748B;
-  --color-border: #E5E5E5;
+  --color-primary: #102b63;
+  --color-primary-hover: #0a1e49;
+  --color-accent: #ff5c4e;
+  --color-accent-secondary: #ffd43b;
+  --color-text-primary: #102b63;
+  --color-text-secondary: #55709a;
+  --color-border: #c6dff3;
   --color-error: #B91C1C;
   --color-success: #15803D;
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -19,6 +19,8 @@
   body {
     background-color: var(--color-background);
     color: var(--color-text-primary);
+    min-width: 320px;
+    background-image: radial-gradient(circle at 8% 12%, rgba(255,255,255,.85) 0 3%, transparent 15%), radial-gradient(circle at 92% 88%, rgba(135,98,255,.2) 0 7%, transparent 26%);
   }
 }
 
@@ -39,6 +41,33 @@
     @apply bg-accent text-white hover:opacity-90 shadow-sm;
   }
   .input {
-    @apply flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm placeholder:text-text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50;
+    @apply flex h-11 w-full rounded-2xl border border-border bg-surface px-4 py-2 text-sm placeholder:text-text-secondary shadow-sm transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300/60 disabled:cursor-not-allowed disabled:opacity-50;
   }
+}
+
+@layer components {
+  .app-shell { @apply min-h-screen lg:grid lg:grid-cols-[18rem_minmax(0,1fr)]; }
+  .app-sidebar { @apply flex flex-wrap gap-2 border-b border-white/70 bg-white/90 p-4 shadow-sm backdrop-blur lg:sticky lg:top-0 lg:h-screen lg:flex-col lg:flex-nowrap lg:border-b-0 lg:border-r lg:p-6; }
+  .brand-mark { @apply mr-auto text-xl font-black tracking-tight text-primary lg:mb-10; }
+  .brand-mark span:last-child { color: var(--color-accent); }
+  .brand-mark-icon { @apply mr-1 inline-grid h-7 w-7 place-items-center rounded-xl bg-accent text-sm text-white; }
+  .app-nav { @apply order-3 flex w-full items-center gap-1 overflow-x-auto pt-2 lg:order-none lg:grid lg:w-auto lg:gap-2 lg:pt-0; }
+  .app-nav-link { @apply inline-flex shrink-0 items-center gap-2 rounded-2xl px-3 py-2 text-xs font-bold text-text-secondary transition hover:bg-sky-100 hover:text-primary lg:gap-3 lg:px-4 lg:py-3 lg:text-sm; }
+  .app-nav-link-active { @apply bg-[#fff0ee] text-accent shadow-sm; }
+  .app-main { @apply min-w-0 px-4 py-7 sm:px-8 sm:py-10 lg:px-12; }
+  .section-kicker { @apply text-sm font-black uppercase tracking-[0.18em] text-violet-600; }
+  .form-surface { @apply rounded-[2rem] border border-white/80 bg-white/95 p-5 shadow-[0_18px_55px_rgba(58,135,186,0.16)] sm:p-8; }
+  .field-label { @apply mb-2 flex items-center gap-2 text-sm font-bold text-text-primary; }
+  .field-label svg { @apply h-4 w-4 text-violet-600; }
+  .input-tall { @apply h-12; }
+  .voice-concierge { @apply flex flex-col gap-4 rounded-[2rem] border border-emerald-300 bg-gradient-to-br from-emerald-100 via-teal-50 to-sky-50 p-5 shadow-[0_18px_48px_rgba(21,180,151,.14)] sm:flex-row sm:items-center sm:p-7; }
+  .voice-concierge-icon { @apply grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white text-emerald-600 shadow-sm; }
+  .voice-availability { @apply rounded-full bg-emerald-200/70 px-3 py-1 text-xs font-bold text-emerald-800; }
+  .voice-button { @apply grid h-9 w-9 place-items-center rounded-full border border-sky-200 bg-white text-primary shadow-sm transition hover:scale-105 hover:border-violet-300 hover:text-violet-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300/70 disabled:cursor-not-allowed disabled:opacity-50; }
+  .voice-button svg { @apply h-4 w-4; }
+  .voice-button-large { @apply h-16 w-16 border-0 bg-emerald-500 text-white shadow-[0_12px_25px_rgba(16,185,129,.28)] hover:bg-emerald-600 hover:text-white; }
+  .voice-button-large svg { @apply h-7 w-7; }
+  .voice-button-listening { @apply animate-pulse bg-violet-600 text-white hover:bg-violet-700 hover:text-white; }
+  .empty-plan-state { @apply flex flex-col items-center justify-center rounded-[2rem] border border-dashed border-sky-300 bg-white/70 p-10 text-center shadow-sm sm:p-14; }
+  .empty-plan-icon { @apply mb-5 grid h-16 w-16 place-items-center rounded-3xl bg-yellow-200 text-primary; }
 }
