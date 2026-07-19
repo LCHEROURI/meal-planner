@@ -1,7 +1,7 @@
-import { Outlet, Navigate, Link, useLocation } from 'react-router-dom';
+import { Outlet, Navigate, Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
-import { LogOut } from 'lucide-react';
+import { CalendarDays, Home, LogOut, PlusCircle } from 'lucide-react';
 import { auth } from '../lib/firebase/config';
 
 export function AppLayout() {
@@ -25,27 +25,20 @@ export function AppLayout() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <header className="border-b border-border bg-surface px-6 py-4 shadow-sm">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
-          <Link to="/app" className="text-xl font-bold tracking-tight text-primary">
-            MealPlanner Dashboard
-          </Link>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-text-secondary">{user.email}</span>
-            <button
-              onClick={() => auth.signOut()}
-              className="flex items-center text-sm text-text-secondary transition-colors hover:text-text-primary"
-            >
-              <LogOut className="mr-1 h-4 w-4" />
-              Sign out
-            </button>
-          </div>
+    <div className="app-shell">
+      <aside className="app-sidebar">
+        <Link to="/app" className="brand-mark"><span className="brand-mark-icon">✦</span> Meal<span>Planner</span></Link>
+        <nav className="app-nav" aria-label="Main navigation">
+          <NavLink end to="/app" className={({ isActive }) => `app-nav-link ${isActive ? 'app-nav-link-active' : ''}`}><Home aria-hidden="true" /> Home</NavLink>
+          <NavLink to="/app/new-plan" className={({ isActive }) => `app-nav-link ${isActive ? 'app-nav-link-active' : ''}`}><PlusCircle aria-hidden="true" /> Create plan</NavLink>
+          <NavLink to="/app/plans" className={({ isActive }) => `app-nav-link ${isActive ? 'app-nav-link-active' : ''}`}><CalendarDays aria-hidden="true" /> My plans</NavLink>
+        </nav>
+        <div className="mt-auto hidden lg:block">
+          <p className="mb-3 truncate text-xs font-semibold text-text-secondary">{user.email}</p>
+          <button onClick={() => auth.signOut()} className="app-nav-link w-full"><LogOut aria-hidden="true" /> Sign out</button>
         </div>
-      </header>
-      <main className="mx-auto w-full max-w-7xl flex-1 p-6">
-        <Outlet />
-      </main>
+      </aside>
+      <main className="app-main"><Outlet /></main>
     </div>
   );
 }
