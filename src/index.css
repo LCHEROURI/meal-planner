@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #FDFBF7;
+  --color-surface: #FFFFFF;
+  --color-primary: #4B6043;
+  --color-primary-hover: #3A4A34;
+  --color-accent: #C87550;
+  --color-accent-secondary: #D4AF37;
+  --color-text-primary: #333333;
+  --color-text-secondary: #64748B;
+  --color-border: #E5E5E5;
+  --color-error: #B91C1C;
+  --color-success: #15803D;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-hover shadow-sm;
+  }
+  .btn-secondary {
+    @apply bg-surface text-text-primary border border-border hover:bg-gray-50 shadow-sm;
+  }
+  .btn-ghost {
+    @apply hover:bg-gray-100 hover:text-text-primary;
+  }
+  .btn-accent {
+    @apply bg-accent text-white hover:opacity-90 shadow-sm;
+  }
+  .input {
+    @apply flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm placeholder:text-text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
