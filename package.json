@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "firebase:check": "node scripts/verify-firebase-config.mjs",
+    "deploy:firestore": "npm run firebase:check && firebase deploy --only firestore",
+    "deploy": "npm run firebase:check && npm run build && firebase deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -33,6 +36,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.4",
+    "firebase-tools": "^15.24.0",
     "jsdom": "^29.1.1",
     "oxlint": "^1.71.0",
     "postcss": "^8.5.20",

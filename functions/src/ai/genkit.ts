@@ -32,7 +32,7 @@ export const generateMealPlanFlow = ai.defineFlow(
     `;
 
     const { output } = await ai.generate({
-      model: vertexAI.model('gemini-1.5-flash-001'),
+      model: vertexAI.model('gemini-2.5-flash'),
       system: systemPrompt,
       prompt: prompt,
       output: {
@@ -50,7 +50,7 @@ export const generateMealPlanFlow = ai.defineFlow(
     output.status = 'ready';
     output.generationInput = input;
     output.metadata = {
-      modelName: 'gemini-1.5-flash',
+      modelName: 'gemini-2.5-flash',
       promptVersion: '1.0',
       generationTimestamp: new Date().toISOString(),
       generationDurationMs: 0,
@@ -89,7 +89,7 @@ export const regenerateRecipeFlow = ai.defineFlow(
     `;
 
     const { output } = await ai.generate({
-      model: vertexAI.model('gemini-1.5-flash-001'),
+      model: vertexAI.model('gemini-2.5-flash'),
       system: systemPrompt,
       prompt: prompt,
       output: {

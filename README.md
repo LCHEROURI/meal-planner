@@ -37,15 +37,23 @@ A complete, working, production-ready MVP of an AI-powered weeknight meal-planni
 
 ## Deployment
 
-This app is ready to be deployed to Firebase Hosting and Firebase Functions.
+Before deploying, complete these one-time Console actions for the project in `.firebaserc`:
+
+1. In Firebase Console, create/select the project and attach a billing account (Cloud Functions and Vertex AI require billing).
+2. In **Authentication → Sign-in method**, enable **Email/Password** and **Google**. Add your Hosting domain to **Authentication → Settings → Authorized domains** after the first deploy.
+3. In **Firestore Database**, create a production-mode database in the region you intend to keep.
+4. In Google Cloud Console, enable the **Vertex AI API** for the same project.
+5. In **App Check**, register the web app with **reCAPTCHA v3**, then copy its site key to `VITE_RECAPTCHA_SITE_KEY`. Do not enforce App Check until you have verified a deployed client is receiving tokens.
+6. Copy `.env.example` to `.env` and replace the Firebase values with the Web app configuration from **Project settings → Your apps**. `.env` is intentionally ignored by Git.
+
+Deploy from the repository root:
 
 ```bash
-# Build the frontend
-npm run build
+# Sign in once, then select the matching project.
+npx firebase login
+npx firebase use --add
 
-# Build the functions
-cd functions && npm run build && cd ..
-
-# Deploy to Firebase
-firebase deploy
+# The scripts validate .env and .firebaserc before deploying.
+npm run deploy:firestore
+npm run deploy
 ```
